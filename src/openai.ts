@@ -1,15 +1,15 @@
-import dotenv from "dotenv"; 
-dotenv.config(); 
-import OpenAI from "openai"; 
-import { zodResponseFormat } from "openai/helpers/zod.mjs";
+import dotenv from 'dotenv';
+dotenv.config();
+import OpenAI from 'openai';
+import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from "zod";  
 
 const schema = z.object({
-    produtos: z.array(z.string()),
+  produtos: z.array(z.string()),
 });
 
 const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPEN_AI_API_KEY,
 });
 
 export const generateProducts = async (message: string) => {
