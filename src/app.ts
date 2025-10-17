@@ -4,7 +4,6 @@ import express from "express";
 import OpenAI from "openai";
 import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
-import { Schema } from "zod/v3";
 
 const app = express();
 const client = new OpenAI({
@@ -38,7 +37,7 @@ app.post("/generate", async (req, res) => {
         return res.status(400).json({ error: 'Refusal'})
     };  
 
-    res.json(completion.choices[0].message.parsed?.produto[0])
+    res.json(completion.choices[0].message.parsed?.produtos[0])
     } catch (e) {
       console.log(e);
       res.status(500).json({ error: "Internal Server Error" });
