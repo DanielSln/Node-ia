@@ -18,3 +18,11 @@ const produtos: {
     { nome: "Maça", estoque: 10 },
     { nome: "Banana", estoque: 10 },
 ];
+
+export const produtosEstoque = () => {
+  return produtos.filter((produto) => produto.estoque > 0);
+};
+
+export const produtosEmFalta = () => {
+  return produtos.filter((produto) => produto.estoque = 0);
+};
