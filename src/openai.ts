@@ -16,11 +16,11 @@ export const generateProducts = async (message: string) => {
     const completion = await client.chat.completions.parse({
       model: "gpt-4o-mini",
       max_tokens: 100,
-      response_format: zodResponseFormat(schema, "produtos_schema"),
+      response_format: zodResponseFormat(schema, "produtos"),
       messages: [
         {
           role: "developer",
-          content: "Liste três produtos que atendam a necessidade do usuário",
+          content: "Liste três produtos que atendam a necessidade do usuário. Considere apenas os produtos em estoque.",
         },
         {
           role: "user",
