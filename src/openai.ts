@@ -22,10 +22,13 @@ const tools: ChatCompletionTool[] = [
       description: "Retorna uma lista de produtos que estão em estoque.",
       parameters: {
         type: "object",
-        properties: {},
+        properties: {
+          dummy: { type: "string", enum: ["true"] }
+        },
+        required: ["dummy"],
         additionalProperties: false,
-        strict: true,
       },
+      strict: true,
     },
   },
   {
@@ -35,13 +38,16 @@ const tools: ChatCompletionTool[] = [
       description: "Retorna uma lista de produtos que estão em falta no estoque.",
       parameters: {
         type: "object",
-        properties: {},
+        properties: {
+          dummy: { type: "string", enum: ["true"] }
+        },
+        required: ["dummy"],
         additionalProperties: false,
-        strict: true,
       },
+      strict: true,
     },
   },
-],
+];
 
 export const generateProducts = async (message: string) => {
   const messages: ChatCompletionMessageParam[] = [
@@ -62,7 +68,7 @@ export const generateProducts = async (message: string) => {
     response_format: zodResponseFormat(schema, "produtos"),
     tools,
     messages,
-});
+  });
 
   if (completion.choices[0].message.refusal) {
     throw new Error("Refusal");
