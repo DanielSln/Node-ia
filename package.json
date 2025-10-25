@@ -21,5 +21,13 @@
     "express": "^5.1.0",
     "openai": "^6.4.0",
     "zod": "^3.23.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielSln/node-ia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DanielSln/node-ia/issues"
+  },
+  "homepage": "https://github.com/DanielSln/node-ia#readme"
 }

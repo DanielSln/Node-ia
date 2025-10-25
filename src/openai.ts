@@ -30,7 +30,7 @@ export const generateProducts = async (message: string) => {
     });
 
     if (completion.choices[0].message.refusal) {
-        throw new Error("Refusal");
+      throw new Error("Refusal");
     }
 
     return completion.choices[0].message.parsed;
