@@ -23,7 +23,7 @@ const tools: ChatCompletionTool[] = [
       parameters: {
         type: "object",
         properties: {
-          dummy: { type: "string", enum: ["true"] }
+          dummy: { type: "string", enum: ["true"] },
         },
         required: ["dummy"],
         additionalProperties: false,
@@ -35,11 +35,12 @@ const tools: ChatCompletionTool[] = [
     type: "function",
     function: {
       name: "produtos_em_falta",
-      description: "Retorna uma lista de produtos que estão em falta no estoque.",
+      description:
+        "Retorna uma lista de produtos que estão em falta no estoque.",
       parameters: {
         type: "object",
         properties: {
-          dummy: { type: "string", enum: ["true"] }
+          dummy: { type: "string", enum: ["true"] },
         },
         required: ["dummy"],
         additionalProperties: false,
@@ -54,7 +55,7 @@ export const generateProducts = async (message: string) => {
     {
       role: "developer",
       content:
-      "Liste três produtos que atendam a necessidade do usuário. Considere apenas os produtos em estoque.",
+        "Liste três produtos que atendam a necessidade do usuário. Considere apenas os produtos em estoque.",
     },
     {
       role: "user",
