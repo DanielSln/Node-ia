@@ -55,7 +55,7 @@ export const generateProducts = async (message: string) => {
     {
       role: "developer",
       content:
-        "Liste três produtos que atendam a necessidade do usuário. Considere apenas os produtos em estoque.",
+        "Liste três produtos que atendam a necessidade do usuário. Considere apenas os produtos em falta.",
     },
     {
       role: "user",
@@ -74,6 +74,19 @@ export const generateProducts = async (message: string) => {
   if (completion.choices[0].message.refusal) {
     throw new Error("Refusal");
   }
+
+  const {tool_calls} = completion.choices[0].message;
+  if (tool_calls){
+    const {tool_call} = tool_calls;
+    const toolsMap = {
+      produtos_em_estoque: produtosEmEstoque,
+      produtos_em_falta: produtosEmFalta,
+    }
+    const functionToCall = toolsMap[tool_call.function.name];
+    if (!functionToCall){
+      throw new Error("Function not found");
+  }
+    const result = functionToCall(tool_call.function.parsed_arguments);
 
   return completion.choices[0].message.parsed;
 };
