@@ -75,18 +75,22 @@ export const generateProducts = async (message: string) => {
     throw new Error("Refusal");
   }
 
+  const produtosEmEstoque = () => [];
+  const produtosEmFalta = () => [];
+
   const {tool_calls} = completion.choices[0].message;
-  if (tool_calls){
-    const {tool_call} = tool_calls;
+  if (tool_calls && tool_calls.length > 0) {
+    const tool_call = tool_calls[0];
     const toolsMap = {
       produtos_em_estoque: produtosEmEstoque,
       produtos_em_falta: produtosEmFalta,
-    }
-    const functionToCall = toolsMap[tool_call.function.name];
+    } as const;
+    const functionToCall = toolsMap[tool_call.function.name as keyof typeof toolsMap];
     if (!functionToCall){
       throw new Error("Function not found");
+    }
+    const result = functionToCall();
   }
-    const result = functionToCall(tool_call.function.parsed_arguments);
 
   return completion.choices[0].message.parsed;
 };
